@@ -30,13 +30,19 @@
       "nosgx" 
       "quiet"
       "splash"
-
+      "boot.shell_on_fail"
     ];
+    hardwareScan = true;
+    # modules to load early in the boot process, for nicer boot splash at correct rez
+    initrd = {
+      verbose = false;
+      kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    };
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
         devices = [ "nodev" ];
-        enabled = true;
+        enable = true;
         useOSProber = true;
         efiSupport = true;
         #efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
@@ -115,7 +121,7 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true
+    alsa.support32Bit = true;
     pulse.enable = true;
   };
 
@@ -153,11 +159,14 @@
   #   enableSSHSupport = true;
   # };
 
-  Enable the OpenSSH daemon.
+  #Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   #enable thunderbolt
   services.hardware.bolt.enable = true;
+
+  #docker
+  virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
