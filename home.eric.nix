@@ -25,8 +25,6 @@
         c = "clear";
         h = "history";
         wg = "wget -c";
-        .. = "cd ..";
-        .... = 'cd ../..';
         # nix stuff
         ne = "nix-env";
         ni = "nix-env -iA";
@@ -36,17 +34,17 @@
         vim = "nvim";
         vi = "nvim";
         v = "nvim";
-        svi = "sudo nvim"
-        sv = "sudo nvim"
+        svi = "sudo nvim";
+        sv = "sudo nvim";
         # replacements
-        rm = "rm -I --preserve-root"
-        ln = "ln -i"
-        df = "df -h"
-        du = "du -h"
+        rm = "rm -I --preserve-root";
+        ln = "ln -i";
+        df = "df -h";
+        du = "du -h";
         ls = "eza -a";
         ll = "eza -la";
         # open vscode as root
-        rootcode = "sudo code . --no-sandbox --user-data-dir /root/.vscode"
+        rootcode = "sudo code . --no-sandbox --user-data-dir /root/.vscode";
     };
     oh-my-zsh = {
       enable = true;
@@ -113,4 +111,4 @@
       };
     };
   };
-};
+}

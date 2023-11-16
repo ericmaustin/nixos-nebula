@@ -47,14 +47,11 @@
         efiSupport = true;
         #efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
         device = "nodev";
-        version = 2;
-        theme = {
-          pkgs.fetchFromGitHub = {
-            owner = "shvchk";
-            repo = "fallout-grub-theme";
-            rev = "e8433860b11abb08720d7c32f5b9a2a534011bca";
-            sha256 = "sha256-7kvLfD6Nz4cEMrmCA9yq4enyqVyqiTkVZV5y4RyUatU=";
-          };
+        theme = pkgs.fetchFromGitHub {
+          owner = "shvchk";
+          repo = "fallout-grub-theme";
+          rev = "e8433860b11abb08720d7c32f5b9a2a534011bca";
+          sha256 = "sha256-mvb44mFVToZ11V09fTeEQRplabswQhqnkYHH/057wLE=";
         };
       };
     };
@@ -62,8 +59,9 @@
 
   # networking
   networking = {
-    hostName = "nixnebula";
-    hostId = "nixnebula";
+    hostName = "nixnebula1";
+    # generated with: head -c4 /dev/urandom | od -A none -t x4
+    hostId = "e01f0eed";
     networkmanager.enable = true;
     firewall = {
       allowedTCPPorts = [
