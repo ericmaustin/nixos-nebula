@@ -4,6 +4,13 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    dbus
+    libgcc
+    perl
+    openssl
+    openssl.dev
+    pkg-config
+    autoconf
     lm_sensors
     ethtool
     fetchutils
@@ -27,6 +34,7 @@
     git
     gnupg
     curl
+    curl.dev
     chromium
     firefox
     tmux
@@ -91,8 +99,9 @@
     plasma5Packages.plasma-thunderbolt
   ];
 
-  environment.variables = { 
-    GOROOT = [ "${pkgs.go.out}/share/go" ]; 
+  environment.sessionVariables = { 
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    GOROOT = "${pkgs.go.out}/share/go"; 
   };
 
   # fonts

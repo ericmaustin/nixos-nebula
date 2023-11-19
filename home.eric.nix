@@ -4,6 +4,9 @@
   home.homeDirectory = "/home/eric";
 
   home.packages = with pkgs; [
+    openssl
+    openssl.dev
+    perl
     conky
     alacritty
     obsidian
@@ -51,6 +54,12 @@
       plugins = ["git" "sudo" "docker" "kubectl" "rust" "golang" "python" "pyenv" "rust" "node"];
       theme = "refined";
     };
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    GOROOT = "${pkgs.go.out}/share/go"; 
   };
   
   programs.git = {
