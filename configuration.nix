@@ -68,10 +68,14 @@
         # spotify
         57621
         5353
+	# printing / cups
+	631
       ];
       allowedUDPPorts = [
         # spotify
         5353
+	# printing / cups
+	631
       ];
     };
   };
@@ -108,9 +112,6 @@
     displayManager.autoLogin.user = "eric";
     #displayManager.defaultSession = "plasmawayland";
   };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -162,6 +163,25 @@
 
   #enable thunderbolt
   services.hardware.bolt.enable = true;
+
+  # Enable CUPS to print documents.
+  services.printing = {
+    enable = true;
+    allowFrom = [ "all" ];
+    browsing = true;
+    #stateless = true;
+    drivers = [ pkgs.epson-escpr2 pkgs.canon-cups-ufr2 ];
+  };
+
+  #enable autodiscovery of network printers
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+    publish.enable = true;
+    publish.workstation = true;
+    publish.addresses = true;
+  };
 
   #docker
   virtualisation.docker.enable = true;
