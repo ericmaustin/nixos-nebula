@@ -18,16 +18,14 @@
     pciutils
     wget
     eza
-    docker
     gcc
-    terraform
+    unstable.terraform
     python311Packages.pip
-    kubernetes
-    kubernetes-helm
-    kubectl
+    unstable.kubernetes
+    unstable.kubernetes-helm
+    unstable.kubectl
     direnv
     jq
-    neovim
     killall
     tree
     wget
@@ -35,8 +33,7 @@
     gnupg
     curl
     curl.dev
-    chromium
-    firefox
+    unstable.chromium
     tmux
     gnumake
     unzip
@@ -50,53 +47,45 @@
     youtube-dl
     vlc
     xclip
-    gparted
     uget
     qtox
-    gimp
-    inkscape
     ghostscript
-    blueman
     pass
-    faba-icon-theme
-    faba-mono-icons
-    wirelesstools
-    syncthing
+    unstable.faba-icon-theme
+    unstable.faba-mono-icons
     ruby
     sbt
-    go
-    openjdk
-    nodejs
-    watchman
-    android-studio
-    genymotion
-    stumpwm
-    lispPackages.quicklisp
-    kubectl
-    google-cloud-sdk
-    awscli2
-    steam
-    spotify
-    rustc
-    cargo
-    rustup
-    rustfmt
-    rustcat
-    docker
-    alacritty
-    kotlin
-    rust-analyzer
+    unstable.go
+    unstable.openjdk
+    unstable.nodejs
+    unstable.watchman
+    unstable.stumpwm
+    unstable.lispPackages.quicklisp
+    unstable.kubectl
+    unstable.google-cloud-sdk
+    unstable.awscli2
+    unstable.neovim
+    unstable.gparted
+    unstable.gimp
+    unstable.inkscape
+    unstable.syncthing
+    unstable.genymotion
+    unstable.firefox
+    unstable.wirelesstools
+    unstable.steam
+    unstable.spotify
+    unstable.rustc
+    unstable.cargo
+    unstable.rustup
+    unstable.rustfmt
+    unstable.rustcat
+    unstable.docker
+    unstable.blueman
+    unstable.kotlin
+    unstable.rust-analyzer
     # use FHS chroot for vscode so we can use user sync
-    vscode.fhs
-    jetbrains.rust-rover
-    jetbrains.pycharm-professional
-    jetbrains.idea-ultimate
-    jetbrains.goland
-    jetbrains.datagrip
-    jetbrains-toolbox
-    jetbrains.webstorm
-    libsForQt5.kdeconnect-kde
-    plasma5Packages.plasma-thunderbolt
+    unstable.libsForQt5.kdeconnect-kde
+    unstable.plasma5Packages.plasma-thunderbolt
   ];
 
   environment.sessionVariables = { 

@@ -7,20 +7,57 @@
     openssl
     openssl.dev
     perl
-    conky
-    alacritty
-    obsidian
-    discord
-    deluged
-    zoom-us
-    slack
-    libreoffice-qt
+    unstable.pandoc 
+    unstable.conky
+    unstable.obsidian
+    unstable.discord
+    unstable.deluged
+    unstable.zoom-us
+    unstable.slack
+    unstable.libreoffice-qt
+    unstable.drawio
+    unstable.rclone
+    unstable.rclone-browser
+    unstable.vscode.fhs
+    unstable.android-studio
+    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.goland [
+      "github-copilot"
+      "nixidea"
+      "ideavim"
+      "csv-editor"
+    ])
+    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.clion [
+      "github-copilot"
+      "nixidea"
+      "ideavim"
+      "rust"
+      "csv-editor"
+    ])
+    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.rust-rover [
+      "github-copilot"
+      "nixidea"
+      "ideavim"
+      "csv-editor"
+    ])
+    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.pycharm-professional [
+      "github-copilot"
+      "nixidea"
+      "ideavim"
+      "csv-editor"
+    ])
+    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.idea-ultimate [
+      "github-copilot"
+      "nixidea"
+      "csv-editor"
+      "ideavim"
+      "rust"
+    ])
   ];
 
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
   
   programs.home-manager.enable = true;
-  
+   
   programs.zsh = {
     enable = true;
     enableCompletion = false; # enabled in oh-my-zsh
