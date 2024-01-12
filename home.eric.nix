@@ -109,6 +109,42 @@
     enable = true;
     userName = "Eric Austin";
     userEmail = "eric.m.austin@gmail.com";
+    pull.ff = "only";
+    core = {
+      autocrlf = "input";
+      whitespace = "fix,-indent-with-non-tab";
+      commentChar = "auto";
+    };
+    rebase = {
+      autosquash = true;
+      autostash = true;
+      updateRefs = true;
+    };
+    push = {
+      autoSetUpRemote = true;
+    };
+    init = {
+      defaultBranch = "main";
+    };
+    aliases = {
+      ci = "commit";
+      ca = "commit --amend";
+      can = "commit --ammend --no-edit";
+      dc = "diff --cached";
+      di = "diff";
+      fp = "push --force-with-lease";
+      co = "checkout";
+      s = "status";
+      fpstack = "\!git log --decorate=short --pretty='format:%D' origin/main.. | sed 's/, /\\n/g; s/HEAD -> //'  | grep -Ev '/|^$' | xargs git push --force-with-lease origin";
+      l = "log --oneline";
+      pullrb = "pull --rebase";
+      pullrbi = "pull --rebase --interactive";
+      rc = "rebase --continue";
+      st = "status --short";
+      sw = "switch";
+      graph = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset); - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
+
+    };
   };
 
   services.gpg-agent = {
