@@ -55,6 +55,7 @@
     unstable.faba-mono-icons
     ruby
     sbt
+    nixpkgs-fmt
     unstable.go
     unstable.openjdk
     unstable.nodejs

@@ -20,6 +20,10 @@
     unstable.rclone-browser
     unstable.vscode.fhs
     unstable.android-studio
+    # cloud cli tool
+    unstable.granted
+    # jetbrains stuff with copilot plugins enabled by default via nix as 
+    # copilot won't work on nixos if installed via IDE
     (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.goland [
       "github-copilot"
       "nixidea"
@@ -83,6 +87,7 @@
         du = "du -h";
         ls = "eza -a";
         ll = "eza -la";
+        nixos-rebuild-nebula = "nixos-rebuild --flake .#nixnebula switch";
         # open vscode as root
         rootcode = "sudo code . --no-sandbox --user-data-dir /root/.vscode";
     };
