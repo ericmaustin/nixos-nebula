@@ -62,7 +62,7 @@
 
   programs.home-manager.enable = true;
 
-  programs.zsh = {
+  programs.zsh = with pkgs.unstable; {
     enable = true;
     enableCompletion = false; # enabled in oh-my-zsh
     shellAliases = {
@@ -90,6 +90,7 @@
       nixos-rebuild-nebula = "nixos-rebuild --flake .#nixnebula switch";
       # open vscode as root
       rootcode = "sudo code . --no-sandbox --user-data-dir /root/.vscode";
+      assume = "source ${granted}/bin/.assume-wrapped";
     };
     oh-my-zsh = {
       enable = true;

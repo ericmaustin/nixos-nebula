@@ -86,6 +86,8 @@
     unstable.rust-analyzer
     # use FHS chroot for vscode so we can use user sync
     unstable.libsForQt5.kdeconnect-kde
+    # manage gnupg keys
+    libsForQt5.kgpg
     unstable.plasma5Packages.plasma-thunderbolt
   ];
 
