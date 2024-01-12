@@ -6,17 +6,18 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./environment.nix
       ./users.nix
     ];
-  
-   nix = {
-     package = pkgs.nixFlakes;
-     extraOptions = ''
-       experimental-features = nix-command flakes
-     '';
+
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -29,8 +30,8 @@
     consoleLogLevel = 2;
     supportedFilesystems = [ "ntfs" "zfs" ];
     zfs.forceImportRoot = false;
-    kernelParams = [ 
-      "nosgx" 
+    kernelParams = [
+      "nosgx"
       "quiet"
       "splash"
       "boot.shell_on_fail"
@@ -72,14 +73,14 @@
         # spotify
         57621
         5353
-	# printing / cups
-	631
+        # printing / cups
+        631
       ];
       allowedUDPPorts = [
         # spotify
         5353
-	# printing / cups
-	631
+        # printing / cups
+        631
       ];
     };
   };
@@ -136,7 +137,7 @@
   };
 
   # nvidia settings
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -205,5 +206,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; 
+  system.stateVersion = "23.11";
 }

@@ -89,9 +89,9 @@
     unstable.plasma5Packages.plasma-thunderbolt
   ];
 
-  environment.sessionVariables = { 
+  environment.sessionVariables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
-    GOROOT = "${pkgs.go.out}/share/go"; 
+    GOROOT = "${pkgs.go.out}/share/go";
   };
 
   # fonts
@@ -112,7 +112,7 @@
     libre-baskerville
     jetbrains-mono
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
- ];
+  ];
 
   fonts.fontconfig = {
     defaultFonts = {
