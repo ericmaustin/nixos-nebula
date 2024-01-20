@@ -1,95 +1,96 @@
 { config, pkgs, ... }:
-
+let
+  unstablePkgs = with pkgs.unstable; [
+    awscli2
+    blueman
+    cargo
+    chromium
+    docker
+    faba-icon-theme
+    faba-mono-icons
+    firefox
+    genymotion
+    gimp
+    go
+    google-cloud-sdk
+    gparted
+    inkscape
+    kotlin
+    kubectl
+    kubernetes
+    kubernetes-helm
+    libsForQt5.kdeconnect-kde
+    lispPackages.quicklisp
+    neovim
+    nodejs
+    openjdk
+    plasma5Packages.plasma-thunderbolt
+    rust-analyzer
+    rustc
+    rustcat
+    rustfmt
+    rustup
+    spotify
+    steam
+    steam
+    stumpwm
+    syncthing
+    terraform
+    watchman
+    wirelesstools
+  ];
+in
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    dbus
-    libgcc
-    perl
-    openssl
-    openssl.dev
-    pkg-config
-    autoconf
-    lm_sensors
-    ethtool
-    fetchutils
-    usbutils
-    pciutils
-    wget
-    eza
-    gcc
-    unstable.terraform
-    python311Packages.pip
-    unstable.kubernetes
-    unstable.kubernetes-helm
-    unstable.kubectl
-    direnv
-    jq
-    killall
-    tree
-    wget
-    git
-    gnupg
-    curl
-    curl.dev
-    unstable.chromium
-    tmux
-    gnumake
-    unzip
     aspell
+    aspellDicts.ca
     aspellDicts.en
     aspellDicts.es
-    aspellDicts.ca
-    imagemagick
-    offlineimap
-    mu
-    youtube-dl
-    vlc
-    xclip
-    uget
-    qtox
+    autoconf
+    curl
+    curl.dev
+    dbus
+    direnv
+    ethtool
+    eza
+    fetchutils
+    gcc
     ghostscript
+    git
+    gnumake
+    gnupg
+    imagemagick
+    jq
+    killall
+    libgcc
+    libsForQt5.kgpg # manage gnupg keys
+    lm_sensors
+    mu
+    nixpkgs-fmt
+    offlineimap
+    openssl
+    openssl.dev
     pass
-    unstable.faba-icon-theme
-    unstable.faba-mono-icons
+    pciutils
+    perl
+    pkg-config
+    python311Packages.pip
+    qtox
     ruby
     sbt
-    nixpkgs-fmt
-    unstable.go
-    unstable.openjdk
-    unstable.nodejs
-    unstable.watchman
-    unstable.stumpwm
-    unstable.lispPackages.quicklisp
-    unstable.kubectl
-    unstable.google-cloud-sdk
-    unstable.awscli2
-    unstable.neovim
-    unstable.gparted
-    unstable.gimp
-    unstable.inkscape
-    unstable.syncthing
-    unstable.genymotion
-    unstable.firefox
-    unstable.wirelesstools
-    unstable.steam
-    unstable.spotify
-    unstable.rustc
-    unstable.cargo
-    unstable.rustup
-    unstable.rustfmt
-    unstable.rustcat
-    unstable.docker
-    unstable.blueman
-    unstable.kotlin
-    unstable.rust-analyzer
-    # use FHS chroot for vscode so we can use user sync
-    unstable.libsForQt5.kdeconnect-kde
-    # manage gnupg keys
-    libsForQt5.kgpg
-    unstable.plasma5Packages.plasma-thunderbolt
-  ];
+    tmux
+    tree
+    uget
+    unzip
+    usbutils
+    vlc
+    wget
+    wget
+    xclip
+    youtube-dl
+  ] ++ unstablePkgs;
 
   environment.sessionVariables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";

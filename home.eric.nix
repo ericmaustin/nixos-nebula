@@ -1,4 +1,59 @@
 { config, pkgs, ... }:
+let
+  unstablePkgs = with pkgs.unstable; [
+    android-studio
+    conky
+    deluged
+    discord
+    drawio
+    granted # cloud cli tool
+    libreoffice-qt
+    obsidian
+    pandoc
+    rclone
+    rclone-browser
+    slack
+    vscode.fhs
+    zoom-us
+  ];
+
+  jetbrainsPkgs = with pkgs.unstable.jetbrains; [
+    # jetbrains stuff with copilot plugins enabled by default via nix as 
+    # copilot won't work on nixos if installed via IDE
+    (plugins.addPlugins goland [
+      "github-copilot"
+      "nixidea"
+      "ideavim"
+      "csv-editor"
+    ])
+    (plugins.addPlugins clion [
+      "github-copilot"
+      "nixidea"
+      "ideavim"
+      "rust"
+      "csv-editor"
+    ])
+    (plugins.addPlugins rust-rover [
+      "github-copilot"
+      "nixidea"
+      "ideavim"
+      "csv-editor"
+    ])
+    (plugins.addPlugins pycharm-professional [
+      "github-copilot"
+      "nixidea"
+      "ideavim"
+      "csv-editor"
+    ])
+    (plugins.addPlugins idea-ultimate [
+      "github-copilot"
+      "nixidea"
+      "csv-editor"
+      "ideavim"
+      "rust"
+    ])
+  ];
+in
 {
   home.username = "eric";
   home.homeDirectory = "/home/eric";
@@ -7,65 +62,16 @@
     openssl
     openssl.dev
     perl
-    unstable.pandoc
-    unstable.conky
-    unstable.obsidian
-    unstable.discord
-    unstable.deluged
-    unstable.zoom-us
-    unstable.slack
-    unstable.libreoffice-qt
-    unstable.drawio
-    unstable.rclone
-    unstable.rclone-browser
-    unstable.vscode.fhs
-    unstable.android-studio
-    # cloud cli tool
-    unstable.granted
-    # jetbrains stuff with copilot plugins enabled by default via nix as 
-    # copilot won't work on nixos if installed via IDE
-    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.goland [
-      "github-copilot"
-      "nixidea"
-      "ideavim"
-      "csv-editor"
-    ])
-    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.clion [
-      "github-copilot"
-      "nixidea"
-      "ideavim"
-      "rust"
-      "csv-editor"
-    ])
-    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.rust-rover [
-      "github-copilot"
-      "nixidea"
-      "ideavim"
-      "csv-editor"
-    ])
-    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.pycharm-professional [
-      "github-copilot"
-      "nixidea"
-      "ideavim"
-      "csv-editor"
-    ])
-    (unstable.jetbrains.plugins.addPlugins unstable.jetbrains.idea-ultimate [
-      "github-copilot"
-      "nixidea"
-      "csv-editor"
-      "ideavim"
-      "rust"
-    ])
-  ];
+  ] ++ unstablePkgs ++ jetbrainsPkgs;
 
   home.stateVersion = "23.11";
 
   programs.home-manager.enable = true;
 
-  programs.zsh = with pkgs.unstable; {
+  programs.zsh = {
     enable = true;
-    enableCompletion = false; # enabled in oh-my-zsh
-    shellAliases = {
+    enableCompletion = true;
+    shellAliases = with pkgs.unstable; {
       c = "clear";
       h = "history";
       wg = "wget -c";
@@ -94,9 +100,37 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" "docker" "kubectl" "rust" "golang" "python" "pyenv" "rust" "node" ];
+      plugins = [
+        "docker"
+        "git"
+        "golang"
+        "kubectl"
+        "node"
+        "pyenv"
+        "python"
+        "rust"
+        "rust"
+        "sudo"
+      ];
       theme = "refined";
     };
+    initExtra = ''
+      # set PATH so it includes user's private npm bin if it exists
+      export PATH="$PATH:$HOME/.npm-global/bin"
+      # set PATH so it includes user's private cargo bin if it exists
+      export PATH="$PATH:$HOME/.cargo/bin"
+      # set PATH so it includes user's private go bin if it exists
+      export PATH="$PATH:$HOME/go/bin"
+      # enable direnv
+      eval "$(direnv hook zsh)"
+      # enable aws cli completion
+      complete -C $(which aws_completer) aws
+    '';
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   home.sessionVariables = {
@@ -109,27 +143,29 @@
     enable = true;
     userName = "Eric Austin";
     userEmail = "eric.m.austin@gmail.com";
-    pull.ff = "only";
-    core = {
-      autocrlf = "input";
-      whitespace = "fix,-indent-with-non-tab";
-      commentChar = "auto";
-    };
-    rebase = {
-      autosquash = true;
-      autostash = true;
-      updateRefs = true;
-    };
-    push = {
-      autoSetUpRemote = true;
-    };
-    init = {
-      defaultBranch = "main";
+    extraConfig = {
+      pull.ff = "only";
+      core = {
+        autocrlf = "input";
+        whitespace = "fix,-indent-with-non-tab";
+        commentChar = "auto";
+      };
+      rebase = {
+        autosquash = true;
+        autostash = true;
+        updateRefs = true;
+      };
+      push = {
+        autoSetUpRemote = true;
+      };
+      init = {
+        defaultBranch = "main";
+      };
     };
     aliases = {
       ci = "commit";
       ca = "commit --amend";
-      can = "commit --ammend --no-edit";
+      can = "commit --amend --no-edit";
       dc = "diff --cached";
       di = "diff";
       fp = "push --force-with-lease";
@@ -143,7 +179,6 @@
       st = "status --short";
       sw = "switch";
       graph = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset); - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
-
     };
   };
 
