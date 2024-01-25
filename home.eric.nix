@@ -161,6 +161,7 @@ in
       init = {
         defaultBranch = "main";
       };
+      user.signingkey = "9DAAA94827258E3D";
     };
     aliases = {
       ci = "commit";
